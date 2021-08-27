@@ -7,14 +7,14 @@ const update = async (req, res, next) => {
     const { error } = joiContactSchema.validate(req.body);
     if (error) {
       res.status(400).json({
-        message: "missing fields",
+        message: error.message,
       });
     }
 
-    const { id } = req.params;
-    const updateContact = await contactsOperations.update(id, req.body);
+    const { contactId } = req.params;
+    const updateContact = await contactsOperations.update(contactId, req.body);
     if (!updateContact) {
-      return res.status(404).json({ message: "Not found" });
+      return res.status(404).json({ message: "missing fields" });
     }
     res.json({ updateContact });
   } catch (error) {

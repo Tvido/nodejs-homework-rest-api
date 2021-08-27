@@ -4,17 +4,18 @@ const router = express.Router();
 const { joiContactSchema } = require("../../validation");
 const contactsOperations = require("../../model/contactsData");
 
-// const contacts = require("../../model");
-
-// const { contacts: ctrl } = require("../../controllers");
-
-// console.log(ctrl);
+const ctrl = require("../../controllers");
 
 router.get("/", async (req, res, next) => {
   try {
-    const contacts = await contactsOperations.listContacts();
+    const { id } = req.params;
+    const contact = await contactsOperations.getById(id);
+    if (!contact) {
+      res.status(404).json({ message: "Not found" });
+    }
+
     res.json({
-      contacts,
+      contact,
     });
   } catch (error) {
     next(error);

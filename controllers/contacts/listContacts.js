@@ -1,16 +1,19 @@
-const data = require("../../contactsData");
+const contactsOperations = require("../../model/contactsData");
 
-const listContacts = async (req, res) => {
+const listContacts = async (req, res, next) => {
   try {
-    const contacts = await data.listContacts();
+    const { id } = req.params;
+    const contact = await contactsOperations.getById(id);
+    if (!contact) {
+      res.status(404).json({ message: "Not found" });
+    }
+
     res.json({
-      status: "success",
-      code: 200,
-      data: {
-        result: contacts,
-      },
+      contact,
     });
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = listContacts;

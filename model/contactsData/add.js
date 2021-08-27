@@ -10,8 +10,8 @@ const add = async (data) => {
     contacts.push(newContact);
     await updateContacts(contacts);
     return newContact;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 

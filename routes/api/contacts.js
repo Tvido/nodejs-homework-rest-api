@@ -78,11 +78,11 @@ router.delete("/:contactId", async (req, res, next) => {
     const { id } = req.params;
     const deleteContact = await contactsOperations.del(id);
     if (!deleteContact) {
-      res.status(400).json({ message: "missing fields" });
+      return res.status(404).json({ message: "Not found" });
     }
 
     res.json({
-      deleteContact,
+      message: "contact deleted",
     });
   } catch (error) {
     next(error);

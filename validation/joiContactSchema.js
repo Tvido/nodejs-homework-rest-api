@@ -6,7 +6,7 @@ const joiContactSchema = Joi.object({
     minDomainSegments: 2,
     tlds: { allow: ["com", "net"] },
   }),
-  phone: Joi.string().required(),
+  phone: Joi.string().pattern(new RegExp("^[0-9]{3}-[0-9]{2}-[0-9]{2}$")),
 });
 
 module.exports = joiContactSchema;

@@ -6,7 +6,7 @@ const add = async (req, res, next) => {
   try {
     const { error } = joiContactSchema.validate(req.body);
     if (error) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "Missing required name field",
       });
     }

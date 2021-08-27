@@ -1,18 +1,21 @@
 const updateContacts = require("./updateContacts");
 const listContacts = require("./listContacts");
 
-const update = async (id, updateInfo) => {
+const update = async (contactId, body) => {
   try {
     const contacts = await listContacts();
-    const indx = contacts.findIndx((item) => item.id === id);
-    if (indx === -1) {
+    const idx = contacts.findIndex(
+      (item) => String(item.id) === String(contactId)
+    );
+    if (idx === -1) {
       return null;
     }
-    contacts[indx] = { ...contacts[indx], ...updateInfo };
+    contacts[idx] = { ...contacts[idx], ...body };
+
     await updateContacts(contacts);
-    return contacts[indx];
-  } catch (err) {
-    throw err;
+    return contacts[idx];
+  } catch (error) {
+    throw error;
   }
 };
 

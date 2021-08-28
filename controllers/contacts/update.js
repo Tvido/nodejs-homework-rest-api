@@ -13,7 +13,7 @@ const update = async (req, res, next) => {
 
     const { contactId } = req.params;
     const updateContact = await contactsOperations.update(contactId, req.body);
-    if (!updateContact) {
+    if (!req.body) {
       return res.status(404).json({ message: "missing fields" });
     }
     res.json({ updateContact });

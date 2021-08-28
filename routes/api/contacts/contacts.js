@@ -4,7 +4,8 @@ const router = express.Router();
 // const { joiContactSchema } = require("../../validation");
 // const contactsOperations = require("../../model/contactsData");
 
-const ctrl = require("../../controllers/contacts");
+const ctrl = require("../../../controllers/contacts");
+// const ctrl = require("../../controllers/contacts");
 
 router.get("/", ctrl.listContacts);
 

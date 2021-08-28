@@ -5,7 +5,7 @@ const updateContacts = require("./updateContacts");
 
 const add = async (body) => {
   try {
-    const newContact = { id: v4(), ...body };
+    const newContact = { ...body, id: v4() };
     const contacts = await listContacts();
     contacts.push(newContact);
     await updateContacts(contacts);

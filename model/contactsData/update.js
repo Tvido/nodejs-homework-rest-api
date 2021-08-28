@@ -11,7 +11,6 @@ const update = async (contactId, body) => {
       return null;
     }
     contacts[idx] = { ...contacts[idx], ...body };
-
     await updateContacts(contacts);
     return contacts[idx];
   } catch (error) {

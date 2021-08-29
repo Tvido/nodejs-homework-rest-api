@@ -4,7 +4,7 @@
 
 const { Contact } = require("../../models");
 
-const update = async (req, res, next) => {
+const updateStatusContact = async (req, res, next) => {
   try {
     // const { error } = joiContactSchema.validate(req.body);
     // if (error) {
@@ -14,13 +14,16 @@ const update = async (req, res, next) => {
     // }
 
     const { contactId } = req.params;
+    const { favorite } = req.body;
     // const updateContact = await contactsOperations.update(contactId, req.body);
-    const updateContact = await Contact.findByIdAndUpdate(contactId, req.body, {
-      new: true,
-    });
+    const updateContact = await Contact.findByIdAndUpdate(
+      contactId,
+      { favorite },
+      { new: true }
+    );
     // if (!req.body) {
     if (!updateContact) {
-      return res.status(404).json({ message: "missing fields" });
+      return res.status(404).json({ message: "missing fields favorite" });
     }
     res.json({ updateContact });
   } catch (error) {
@@ -28,4 +31,4 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = update;
+module.exports = updateStatusContact;

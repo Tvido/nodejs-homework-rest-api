@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 
+const joiContactSchema = require("../validation");
+
 const contactSchema = Schema(
   {
     name: {
@@ -20,6 +22,6 @@ const contactSchema = Schema(
   { visrionKey: false, timestamps: true }
 );
 
-const contact = model("contact", contactSchema);
+const Contact = model("contact", contactSchema);
 
-module.exports = { contact };
+module.exports = { Contact, joiContactSchema };

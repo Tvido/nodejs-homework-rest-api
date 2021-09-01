@@ -39,12 +39,12 @@ const joiSchema = Joi.object({
   password: Joi.string().min(4).required(),
 });
 
-userSchema.methods.setPassword = function (password) {
-  this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+userSchema.methods.setPassword = async function (password) {
+  this.password = await bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-userSchema.methods.comparePassword = function (password) {
-  return bcrypt.compare(password, this.password);
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = model("user", userSchema);

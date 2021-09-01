@@ -13,7 +13,7 @@ const userSchema = Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: 6,
+      minlength: 4,
     },
     email: {
       type: String,
@@ -26,39 +26,27 @@ const userSchema = Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-    token: {
-      type: String,
-      default: null,
-    },
+    // token: {
+    //   type: String,
+    //   default: null,
+    // },
   },
   { visrionKey: false, timestamps: true }
 );
 
 const joiSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(4).required(),
 });
 
-// userSchema.pre("save", async function (next) {
-//   if (this.isModified("password")) {
-//     const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-//     this.password = await bcrypt.hash(this.password, salt);
-//   }
-//   next();
-// });
-
-userSchema.methods.setPassword = async function (password) {
+userSchema.methods.setPassword = function (password) {
   this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-  // return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.comparePassword = async function (password) {
-  this.password = bcrypt.hashSync(password, this.password);
-  // return await bcrypt.compare(password, this.password);
+userSchema.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password);
 };
 
-// const Contact = model("contact", contactSchema);
-const User = model("user", joiSchema);
+const User = model("user", userSchema);
 
-// module.exports = { Contact, joiContactSchema };
-module.exports = { User, userSchema };
+module.exports = { User, joiSchema };

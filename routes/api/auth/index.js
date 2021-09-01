@@ -1,5 +1,5 @@
-const auth = require("./auth");
+const authRouter = require("./auth");
 
 module.exports = {
-  auth,
+  authRouter,
 };

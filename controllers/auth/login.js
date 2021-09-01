@@ -9,7 +9,7 @@ const login = async (req, res, next) => {
     if (!user) {
       return res.status(400).json({
         status: "error",
-        code: 409,
+        code: 400,
         message: "Email or password is wrong",
       });
     }
@@ -18,7 +18,7 @@ const login = async (req, res, next) => {
     if (!compareResult) {
       return res.status(400).json({
         status: "error",
-        code: 409,
+        code: 400,
         message: "Email or password is wrong",
       });
     }

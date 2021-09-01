@@ -20,7 +20,6 @@ const signup = async (req, res, next) => {
       message: "Success register",
     });
   } catch (error) {
-    // const result = await User.create({ email, password });
     next(error);
   }
 };

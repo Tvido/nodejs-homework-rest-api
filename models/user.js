@@ -4,9 +4,6 @@ const bcrypt = require("bcryptjs");
 
 const emailRegexp =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-// const SALT_WORK_FACTOR = 10;
-
-// const joiContactSchema = require("../validation");
 
 const userSchema = Schema(
   {

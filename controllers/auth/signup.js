@@ -1,6 +1,3 @@
-// const contactsOperations = require("../../model/contacts");
-// const { joiContactSchema } = require("../../validation");
-// const bcrypt = require("bcryptjs");
 const { User } = require("../../models");
 
 const signup = async (req, res, next) => {

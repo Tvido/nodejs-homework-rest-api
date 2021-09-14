@@ -9,14 +9,4 @@ const logout = async (req, res, next) => {
   });
 };
 
-// const logout = async (req, res, next) => {
-//   try {
-//     const id = req.user.id;
-//     await User.updateToken(id, null);
-//     res.status(204).json({});
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 module.exports = logout;

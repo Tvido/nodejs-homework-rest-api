@@ -1,25 +1,24 @@
-// const contactsOperations = require("../../model/contacts");
-
-// const { joiContactSchema } = require("../../validation");
+// const fs = require("fs/promises");
+// const path = require("path");
 
 const { Contact } = require("../../models");
 
-const add = async (req, res, next) => {
-  try {
-    // const { error } = joiContactSchema.validate(req.body);
-    // if (error) {
-    //   return res.status(400).json({
-    //     message: "Missing required name field",
-    //   });
-    // }
+// const productsDir = path.join(__dirname, "../../", "public/products");
 
-    // const newContact = await contactsOperations.add(req.body);
-    // res.status(201).json({ newContact });
-    const result = await Contact.create(req.body);
-    res.status(201).json({ result });
-  } catch (error) {
-    next(error);
-  }
+const add = async (req, res, next) => {
+  const result = await Contact.create(req.body);
+  // const dirPath = path.join(productsDir, result._id);
+  // await fs.mkdir(dirPath);
+  res.status(201).json({ result });
 };
+
+// const add = async (req, res, next) => {
+//   try {
+//     const result = await Contact.create(req.body);
+//     res.status(201).json({ result });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 module.exports = add;

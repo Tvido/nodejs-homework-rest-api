@@ -17,7 +17,6 @@ const orderSchema = Schema(
 
 const joiSchema = Joi.object({
   name: Joi.string().required(),
-  // owner: Joi.string().required(),
 });
 
 const Order = model("order", orderSchema);

@@ -6,6 +6,7 @@ const {
   validation,
   controllerWrapper,
   authenticate,
+  uploadMiddleware,
 } = require("../../../middleware");
 const { auth: ctrl } = require("../../../controllers");
 
@@ -27,6 +28,11 @@ router.get(
   "/users/logout",
   controllerWrapper(authenticate),
   controllerWrapper(ctrl.logout)
+);
+router.patch(
+  "/avatars/:id",
+  uploadMiddleware.single("image"),
+  controllerWrapper(ctrl.updateImg)
 );
 
 module.exports = router;

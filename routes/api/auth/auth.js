@@ -38,6 +38,6 @@ router.patch(
 
 router.get("/verify/:verificationToken", controllerWrapper(ctrl.verification));
 
-router.post("/verify", controllerWrapper(ctrl.repeatVerification));
+router.post("/verify", controllerWrapper(ctrl.verification));
 
 module.exports = router;

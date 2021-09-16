@@ -9,6 +9,9 @@ const login = async (req, res, next) => {
   if (!user) {
     throw new BadRequest("Email wrong");
   }
+  if (user.verify) {
+    throw new BadRequest("Email wrong");
+  }
   const hashPassword = user.password;
   const compareResult = bcrypt.compareSync(password, hashPassword);
   if (!compareResult) {

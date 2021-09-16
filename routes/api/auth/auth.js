@@ -29,10 +29,15 @@ router.get(
   controllerWrapper(authenticate),
   controllerWrapper(ctrl.logout)
 );
+
 router.patch(
   "/avatars/:id",
   uploadMiddleware.single("image"),
   controllerWrapper(ctrl.updateImg)
 );
+
+router.get("/verify/:verificationToken", controllerWrapper(ctrl.verification));
+
+router.post("/verify", controllerWrapper(ctrl.repeatVerification));
 
 module.exports = router;

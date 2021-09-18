@@ -1,14 +1,14 @@
 const nodemiler = require("nodemiler");
 require("dotenv").config();
 
-const { EMAIL_PASS } = process.env;
+const { EMAIL_PASS, EMAIL_ADDRESS } = process.env;
 
 const nodemilerConfig = {
   host: "smtp.meta.ua",
   port: 465,
   secure: true,
   auth: {
-    user: "tvido@meta.ua",
+    user: EMAIL_ADDRESS,
     pass: EMAIL_PASS,
   },
 };

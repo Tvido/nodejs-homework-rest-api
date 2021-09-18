@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
+const { v4 } = require("uuid");
 
 const emailRegexp =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,6 +32,14 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
+    },
   },
   { visrionKey: false, timestamps: true }
 );
@@ -46,6 +55,10 @@ userSchema.methods.setPassword = async function (password) {
 
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.createVerifyToken = function () {
+  this.verificationToken = v4();
 };
 
 const User = model("user", userSchema);
